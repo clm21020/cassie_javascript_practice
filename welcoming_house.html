@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+    #chimney{
+      position:absolute;
+      left: 350px;
+      top: 80px;
+      height: 40px;
+      width: 30px;
+      background-color: red;
+    }
+    #roof{
+      position:absolute;
+      left: 200px;
+      top: 120px;
+      height: 40px;
+      width: 200px;
+      background-color: brown;
+    }
+    #wall{
+      position:absolute;
+      left: 200px;
+      top: 160px;
+      height: 150px;
+      width: 200px;
+      background-color: tan;
+    }
+    #door{
+      position:absolute;
+      left: 275px;
+      top: 235px;
+      height: 75px;
+      width: 50px;
+      background-color: brown;
+    }
+    #door-knob{
+      position:absolute;
+      left: 313px;
+      top: 270px;
+      height: 7px;
+      width: 7px;
+      background-color: tan;
+    }
+    #left-window{
+      position:absolute;
+      left: 215px;
+      top: 200px;
+      height: 40px;
+      width: 40px;
+      background-color: lightblue;
+      border-style: solid;
+      border-width: 5px;
+      border-color: brown;
+      
+    }
+    #right-window{
+      position:absolute;
+      left: 340px;
+      top: 200px;
+      height: 40px;
+      width: 40px;
+      background-color: lightblue;
+      border-style: solid;
+      border-width: 5px;
+      border-color: brown;
+    }
+  </style>
+</head>
+<body>
+  <div id="chimney"></div>
+  <div id="roof"> </div>
+  <div id="wall"> </div>
+  <div id="whole-door" onClick="openDoor()">
+    <div id="door"> </div>
+    <div id="door-knob"> </div>
+  </div>
+  <div id="left-window"> </div>
+  <div id="right-window"> </div>
+</body>
+  <script>
+    function openDoor() {
+      var theDoor = document.getElementById("door");
+      var theDoorKnob = document.getElementById("door-knob");
+      
+      theDoor.style.backgroundColor = "black";
+      theDoorKnob.style.backgroundColor = "black";
+      alert("Hello! Come on in!");
+    }
+  </script>
+</html>
