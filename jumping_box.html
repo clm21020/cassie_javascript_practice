@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jumping Box</title>
+  <style>
+    #top{
+      position:absolute;
+      width: 700px;
+      height: 100px;
+      background-color: darkturquoise;
+      border-radius: 10px;
+    }
+    #cool-man{
+      position:absolute;
+      left: 10px;
+      top: 10px;
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+      background-color: lightgreen;
+    }
+    #user{
+      position:absolute;
+      left: 500px;
+      width: 80px;
+      height: 80px;
+      border-style: solid;
+      border-width: 10px;
+      border-radius: 10px;
+      border-color: lightgreen;
+    }
+    #help{
+      position:absolute;
+      left: 625px;
+      top: 25px;
+      width: 30px;
+      height: 30px;
+      border-style: solid;
+      border-width: 10px;
+      border-radius: 10px;
+      border-color: lightgreen;
+    }
+    #box{
+      position:absolute;
+      left: 300px;
+      top: 300px;
+      width: 75px;
+      height: 50px;
+      border-style: solid;
+      border-width: 5px;
+      border-radius: 10px;
+      border-color: lightgreen;
+      background-color: darkturquoise;
+      
+    }
+  </style>
+</head>
+<body>
+  <div id ="top">
+    <div id="cool-man">Cool Man</div>
+    <div id="user">clm21020</div>
+    <div id="help">help</div>
+  </div>
+  <div id="box" onClick = "moveBox()">Click Me!</div>
+</body>
+  <script>
+    var clickCount = 0;
+    var box = document.getElementById("box");
+    
+    function moveBox(){
+      clickCount++;
+      if (clickCount%5 == 1) {
+        box.style.left = "400px";
+        box.style.top = "150px";
+      } else if (clickCount%5 == 2) {
+        box.style.left = "550px";
+        box.style.top = "300px";
+      } else if (clickCount%5 == 3) {
+        box.style.left = "300px";
+        box.style.top = "400px";
+      } else if (clickCount%5 == 4) {
+        box.style.left = "50px";
+        box.style.top = "350px";
+      } else {
+        box.style.left = "100px";
+        box.style.top = "200px";
+      }
+    }
+    
+  </script>
+</html>
