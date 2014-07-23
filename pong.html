@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <meta charset="utf-8">
+  <title>Pong</title>
+  <style>
+    #container{
+      width: 700px;
+      height: 500px;
+      border-style: double;
+      border-width: 6px;
+      border-color: lightblue;
+      position: absolute;
+      top: 50px;
+      left: 10px
+    }
+    #ball{
+      width: 20px;
+      height: 20px;
+      background-color: black;
+      border-radius: 10px;
+      position: absolute;
+      top: 240px;
+      left: 340px;
+    }
+    #left-paddle{
+      width: 15px;
+      height: 100px;
+      background-color: navy;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    #right-paddle{
+      width: 15px;
+      height: 100px;
+      background-color: navy;
+      position: absolute;
+      top: 0px;
+      left: 685px;
+    }
+    #top-panel{
+      width: 700px;
+      margin-left: 6px;
+      text-align: center;
+    }
+    #left-score, #right-score{
+      font-size: xx-large;
+    }
+    #left{
+      float: left;
+    }
+    #right{
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="ball"></div>
+    <div id="left-paddle"></div>
+    <div id="right-paddle"></div>
+  </div>
+  <div id="top-panel">
+  <span id="left">
+    <span id="left-score">0</span>
+    <span>A for up Z for down</span>
+  </span>
+  <span>SPACE for play & pause</span>
+  <span id="right">
+    <span>K for up M for down</span>
+    <span id="right-score">0</span>
+  </span>
+  </div>
+  
+  <!--<button onclick="start()">Start</button>
+  <button onclick="pause()">Pause</button>-->
+
+</body>
+  <script>
+//scores
+    var leftScore = 0;
+    var rightScore = 0;
+    
+    function updateScore(roundWinner){
+      if (roundWinner == "left") {
+        leftScore++;
+        $("#left-score").html(leftScore);
+      } else if (roundWinner == "right") {
+        rightScore++;
+        $("#right-score").html(rightScore);
+      }
+    }
+    
+//ball movements 
+    var moving = false;
+    var verticalMove = -10;
+    var horizontalMove = 10;
+    
+    function flipVertical(){
+      verticalMove = 0 - verticalMove;
+    }
+    
+    function flipHorizontal(){
+      horizontalMove = 0 - horizontalMove;
+    }
+    
+    function start(){
+      moving = true;
+      move();
+      
+    }
+    
+    function pause(){
+      moving = false;
+    }
+    
+    
+    function move() {
+      var ball = $("#ball");
+      ball.css({top: "+=" + verticalMove + "px", 
+                left: "+=" + horizontalMove + "px"});
+      var ballTop = parseInt(ball.css("top"));
+      var ballLeft = parseInt(ball.css("left"));                 
+      if(ballTop<=0 || ballTop>=480){
+        flipVertical();
+      } 
+      if (parseInt(ball.css("left"))<=10){
+        var leftPaddleTop = parseInt($("#left-paddle").css("top"));
+        flipHorizontal();
+        if (!(ballTop > (leftPaddleTop - 20) && ballTop < (leftPaddleTop + 100))){
+          updateScore("right");
+          moving = false;
+          ball.css({top: "240px",left: "340px"})
+        }
+      } 
+      if (parseInt(ball.css("left"))>=670){
+        var rightPaddleTop = parseInt($("#right-paddle").css("top"));
+        flipHorizontal();
+        if (!(ballTop > (rightPaddleTop - 20) && ballTop < (rightPaddleTop + 100))){
+          updateScore("left");
+          moving = false;
+          ball.css({top: "240px",left: "340px"})
+        }
+      }
+      if (moving == true) {
+        setTimeout(function(){ move(); }, 45);
+      }
+    }    
+    
+    
+    $(document).keydown(function(event){
+      if (event.which == 32 && moving == false){
+        start();
+      } else if (event.which == 32 && moving == true){
+        pause();
+      }
+    });
+    
+//moving the paddles    
+    function leftPaddleUp(){
+      if (parseInt($("#left-paddle").css("top"))>=10){
+        $("#left-paddle").css('top', "-=10px");
+      }
+    }
+    
+    function leftPaddleDown(){
+      if (parseInt($("#left-paddle").css("top"))<=390){
+        $("#left-paddle").css('top', "+=10px");
+      }
+    }
+    
+    function rightPaddleUp(){
+      if (parseInt($("#right-paddle").css("top"))>=10){
+        $("#right-paddle").css('top', "-=10px");
+      }
+    }
+    
+    function rightPaddleDown(){
+      if (parseInt($("#right-paddle").css("top"))<=390){
+        $("#right-paddle").css('top', "+=10px");
+      }
+    }
+    
+    $(document).keypress(function(event){
+      if (event.which == 97 || event.which == 65){
+        leftPaddleUp();
+      } else if (event.which == 122 || event.which == 90){
+        leftPaddleDown();
+      } else if (event.which == 107 || event.which == 75){
+        rightPaddleUp();
+      } else if (event.which == 109 || event.which == 77){
+        rightPaddleDown();
+      } 
+    });
+  
+  </script>
+  
+</html>
